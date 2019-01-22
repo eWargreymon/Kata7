@@ -12,9 +12,9 @@ public class Watch {
     private static final double MinutesPerStep = SecondsPerStep / 60;
     private static final double HoursPerStep = MinutesPerStep / 24;
 
-    private double seconds = Math.PI / 2;
-    private double minutes = Math.PI / 2;
-    private double hours = Math.PI / 2;
+    private double seconds = Math.PI / 2 + SecondsPerStep * LocalDateTime.now().getSecond();
+    private double minutes = Math.PI / 2 + SecondsPerStep * LocalDateTime.now().getMinute();
+    private double hours = Math.PI / 2 + HoursPerStep * LocalDateTime.now().getHour();
     private final Timer timer;
     private final List<Observer> observers = new ArrayList<>();
     
@@ -34,9 +34,9 @@ public class Watch {
     }
     
     private void step() {
-        seconds = normalize(seconds + SecondsPerStep);
-        minutes = normalize(minutes + MinutesPerStep);
-        hours = normalize(hours + HoursPerStep);
+        seconds = Math.PI / 2 + SecondsPerStep * LocalDateTime.now().getSecond();
+        minutes = Math.PI / 2 + SecondsPerStep * LocalDateTime.now().getMinute();
+        hours = Math.PI / 2 + HoursPerStep * LocalDateTime.now().getHour();
     }
 
     private void updateObservers() {
